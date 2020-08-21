@@ -55,5 +55,5 @@ class Heater(Device):
     def getTemperature(self):
         return 0
     
-    def setTemperatur(self, temperature):
+    def setTemperature(self, temperature):
         return

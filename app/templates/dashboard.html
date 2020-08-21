@@ -2,66 +2,42 @@
 <html>
 <head>
 <title>{{title}}</title>
-<!-- 합쳐지고 최소화된 최신 CSS -->
+<!-- Bootstrap -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<script type="application/javascript" src="/static/api.js"></script>
 </head>
 
 <body>
 <div class="container">
-    <div class="page-header">
-        <h1>Tower Dashboard <span class="label label-danger">alpha</span></h1>
-    </div>
-    <p>
-        <div class="row">
-            <div class="col-lg-10">
-                <div class="input-group">
-                    <input type="text" class="form-control" aria-label="Heater Temperature (˚C)" placeholder="Heater Temperature">
-                    <span class="input-group-addon">˚C</span>
-                </div>
-            </div>
-            <div class="col-lg-2">
-                <div class="btn-group btn-group-justified" role="group">
-                    <div class="btn-group" role="group"><button type="button" class="btn btn-default">Set</button></div>
-                    <div class="btn-group" role="group"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-chevron-up"></button></div>
-                    <div class="btn-group" role="group"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-chevron-down"></button></div>
-                </div>
-            </div>
-        </div>
-    </p>
-    <p>
+  <div class="page-header">
+    <h1>Tower Dashboard <span class="label label-success">beta</span>
+      <div class="btn-group btn-group-lg" style="float: right;">
+        <button type="button" class="btn btn-default btn-group-lg" role="group" aria-label="Refresh" onclick="update()">
+          <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>
+        </button>
+      </div>
+    </h1>
+  </div>
+  {% for metric in  metrics %}
+  <p>
+  <h4>{{ metric['title'] }}</h4>
     <div class="row">
-        <div class="col-lg-10">
-            <div class="input-group">
-                <input type="text" class="form-control" aria-label="Extruder Speed (RPM)" placeholder="Extruder Speed">
-                <span class="input-group-addon">RPM</span>
-            </div>
+      <div class="col-sm-8 col-lg-9">
+        <div class="input-group">
+          <input id="{{ metric['name'] }}-input" name="{{ metric['name'] }}-input" type="text" class="form-control" aria-label="{{ metric['title'] }} ({{ metric['unit'] }})" placeholder="{{ metric['unit'] }}">
+          <span class="input-group-addon">{{ metric['unit'] }}</span>
         </div>
-        <div class="col-lg-2">
-            <div class="btn-group btn-group-justified" role="group">
-                <div class="btn-group" role="group"><button type="button" class="btn btn-default">Set</button></div>
-                <div class="btn-group" role="group"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-chevron-up"></button></div>
-                <div class="btn-group" role="group"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-chevron-down"></button></div>
-            </div>
+      </div>
+      <div class="col-sm-4 col-lg-3">
+        <div class="btn-group btn-group-justified" role="group">
+          <div class="btn-group" role="group"><button type="button" class="btn btn-success" onclick="set{{ metric['name'] }}()">Set</button></div>
+          <div class="btn-group" role="group"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-chevron-up"></button></div>
+          <div class="btn-group" role="group"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-chevron-down"></button></div>
         </div>
+      </div>
     </div>
-    </p>
-    <p>
-    <div class="row">
-        <div class="col-lg-10">
-            <div class="input-group">
-                <input type="text" class="form-control" aria-label="Fiber Speed (RPM)" placeholder="Fiber Speed">
-                <span class="input-group-addon">RPM</span>
-            </div>
-        </div>
-        <div class="col-lg-2">
-            <div class="btn-group btn-group-justified" role="group">
-                <div class="btn-group" role="group"><button type="button" class="btn btn-default">Set</button></div>
-                <div class="btn-group" role="group"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-chevron-up"></button></div>
-                <div class="btn-group" role="group"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-chevron-down"></button></div>
-            </div>
-        </div>
-    </div>
-    </p>
+  </p>
+  {% endfor %}
 </div>
 </body>
 </html>
