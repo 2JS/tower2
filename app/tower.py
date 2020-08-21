@@ -36,3 +36,24 @@ class tower:
         self.stepper1.close()
         self.stepper2.close()
         self.heater.close()
+
+class Extruder(Device):
+    def getSpeed(self):
+        return 0
+    
+    def setSpeed(self, speed):
+        return
+
+class Fiber(Device):
+    def getSpeed(self):
+        return 0
+    
+    def setSpeed(self, speed):
+        return
+
+class Heater(Device):
+    def getTemperature(self):
+        return 0
+    
+    def setTemperatur(self, temperature):
+        return
