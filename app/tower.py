@@ -1,7 +1,7 @@
 import os
 import serial
 
-class tower:
+class Tower:
     def __init__(self):
         self.connect()
 
@@ -38,22 +38,28 @@ class tower:
         self.heater.close()
 
 class Extruder(Device):
+    speed = 0
     def getSpeed(self):
-        return 0
+        return self.speed
     
     def setSpeed(self, speed):
+        self.speed = speed
         return
 
 class Fiber(Device):
+    speed = 0
     def getSpeed(self):
-        return 0
+        return self.speed
     
     def setSpeed(self, speed):
+        self.speed = speed
         return
 
 class Heater(Device):
+    temperature = 30
     def getTemperature(self):
-        return 0
+        return self.temperature
     
     def setTemperature(self, temperature):
+        self.temperature = temperature
         return
