@@ -31,8 +31,8 @@
       <div class="col-sm-4 col-lg-3">
         <div class="btn-group btn-group-justified" role="group">
           <div class="btn-group" role="group"><button type="button" class="btn btn-success" onclick="set('{{ metric['name'] }}')">Set</button></div>
-          <div class="btn-group" role="group"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-chevron-up"></button></div>
-          <div class="btn-group" role="group"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-chevron-down"></button></div>
+          <div class="btn-group" role="group"><button type="button" class="btn btn-default" onclick="inc('{{ metric['name'] }}', true)"><span class="glyphicon glyphicon-chevron-up"></button></div>
+          <div class="btn-group" role="group"><button type="button" class="btn btn-default" onclick="inc('{{ metric['name'] }}', false)"><span class="glyphicon glyphicon-chevron-down"></button></div>
         </div>
       </div>
     </div>
