@@ -3,6 +3,7 @@ from flask import *
 from api import *
 
 pathPrefix = ""
+sitename = "Tower"
 
 app = Flask(__name__)
 
@@ -14,7 +15,7 @@ app = Flask(__name__)
 
 @app.route(pathPrefix + '/')
 def index():
-    return render_template('index.html')
+    return redirect(url_for('dashboard'))
 
 @app.route(pathPrefix + '/dashboard')
 def dashboard():
@@ -35,7 +36,7 @@ def dashboard():
             "unit": "RPM"
         }
     ]
-    return render_template('dashboard.html', metrics=metrics)
+    return render_template('dashboard.html', title=sitename+" - Dashboard", metrics=metrics)
 
 
 if __name__ == "__main__":
