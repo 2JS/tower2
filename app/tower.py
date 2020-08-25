@@ -17,8 +17,7 @@ class Tower:
 class Stepper():
     speed = 0
     def __init__(self, port, baud=115200):
-        # self.serial = serial.Serial(port, baud)
-        pass
+        self.serial = serial.Serial(port, baud)
     
     def getSpeed(self):
         return self.speed
@@ -26,24 +25,23 @@ class Stepper():
     def setSpeed(self, speed):
         self.speed = speed
         if speed == 0:
-            # self.serial.write("stop\n")
+            self.serial.write("stop\n")
             return
         direction = '+' if speed > 0 else '-'
         speed = abs(speed)
-        # self.serial.write(f"{speed}{direction}\n")
+        self.serial.write(f"{speed}{direction}\n")
         return
 
 class Heater():
     temperature = 0
     def __init__(self, port):
-        # self.heater = minimalmodbus.Instrument(port, 1)
-        pass
+        self.heater = minimalmodbus.Instrument(port, 1)
 
     def getTemperature(self):
-        # self.temperature = self.heater.read_register(1000)
+        self.temperature = self.heater.read_register(1000)
         return self.temperature
     
     def setTemperature(self, temperature):
         self.temperature = temperature
-        # self.heater.write_register(1001, int(temperature*10))
+        self.heater.write_register(1001, int(temperature*10))
         return
