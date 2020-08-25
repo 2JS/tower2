@@ -17,7 +17,8 @@ class Heater(Resource):
     return {}, 200
   
   def get(self):
-    return {"value": tower.heater.getTemperature()}, 200
+    temp = tower.heater.getTemperature()
+    return {"value": temp[0], "targetValue": temp[1]}, 200
 
 class Extruder(Resource):
   def post(self):
