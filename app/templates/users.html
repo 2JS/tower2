@@ -35,7 +35,9 @@
         {% for username, user in users.items() %}
         <tr>
           <td>{{ username }}</td>
-          <td>{{ user.master}} </td>
+          <td><input type="checkbox" value="Master" aria-label="Master" {% if user.master %} checked {% endif %}
+            onclick="setmaster('{{username}}', {% if user.master %}false{% else %}true{% endif %})" disabled>
+          </td>
           <td>
           <input type="checkbox" value="Authorized" aria-label="Authorized" {% if user.authorized %} checked {% endif %}
           onclick="authorize('{{username}}', {% if user.authorized %}false{% else %}true{% endif %})" {% if user.master %} disabled {% endif %}>
