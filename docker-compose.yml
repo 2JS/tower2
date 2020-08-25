@@ -43,6 +43,7 @@ services:
         devices:
         - "/dev/ttyACM0:/dev/ttyACM0"
         - "/dev/ttyACM1:/dev/ttyACM1"
+        - "/dev/ttyUSB0:/dev/ttyUSB0"
         labels:
         - "traefik.http.routers.tower.rule=Host(`${HOST}`)"
         - "traefik.http.routers.tower.tls=true"
