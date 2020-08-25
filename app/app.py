@@ -1,8 +1,9 @@
+import os
 from flask import *
 # import tower
 from api import *
 
-pathPrefix = ""
+pathPrefix = os.environ['TOWER_PATHPREFIX']
 sitename = "Tower"
 
 app = Flask(__name__)
@@ -44,4 +45,4 @@ if __name__ == "__main__":
     api.add_resource(Heater, '/api/heater')
     api.add_resource(Extruder, '/api/extruder')
     api.add_resource(Fiber, '/api/fiber')
-    app.run(host='0.0.0.0', port=80, debug=True)
+    app.run(host='0.0.0.0', port=int(os.environ['TOWER_WEB_PORT']))

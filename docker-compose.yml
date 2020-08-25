@@ -4,6 +4,13 @@ services:
     app:
         build:
             context: app/
-            dockerfile: ../Dockerfile
-        ports:
-        - "80:80"
+            dockerfile: ../dockerfile
+        restart: unless-stopped
+        environment:
+            TOWER_PATHPREFIX: ''
+            TOWER_WEB_PORT: 80
+            TOWER_HEATER_PORT: /dev/ttyUSB0
+            TOWER_EXTRUDER_PORT: /dev/ttyACM0
+            TOWER_FIBER_PORT: /dev/ttyACM1
+        labels:
+        - "traefik.http."
