@@ -25,11 +25,11 @@ class Stepper():
     def setSpeed(self, speed):
         self.speed = speed
         if speed == 0:
-            self.serial.write("stop\n")
+            self.serial.write("stop\n".encode('utf-8'))
             return
         direction = '+' if speed > 0 else '-'
         speed = abs(speed)
-        self.serial.write(f"{speed}{direction}\n")
+        self.serial.write(f"{speed}{direction}\n".encode('utf-8'))
         return
 
 class Heater():
