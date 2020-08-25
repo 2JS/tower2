@@ -47,7 +47,9 @@ def signup():
 @app.route(pathPrefix + '/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':
-        return render_template('login.html')
+        if current_user.is_anonymous:
+            return render_template('login.html')
+        return redirect(url_for('dashboard'))
 
     user_id = request.form['username']
     password = request.form['password']
@@ -81,6 +83,15 @@ def users():
             return render_template('users.html', users=USERS)
         else:
             return redirect(url_for('dashboard'))
+    
+    user_id = request.form['username']
+    authorize = request.form['authorize']
+
+    if user_id in USERS:
+        authorizeUser(USERS[user_id], authorize=='true')
+        return '', 200
+    else:
+        return '', 404
 
 @app.route(pathPrefix + '/dashboard')
 @login_required
@@ -102,7 +113,10 @@ def dashboard():
             "unit": "RPM"
         }
     ]
-    return render_template('dashboard.html', title=sitename+" - Dashboard", metrics=metrics)
+    if current_user.authorized:
+        return render_template('dashboard.html', title=sitename+" - Dashboard", metrics=metrics)
+    else:
+        return redirect(url_for('login'))
 
 
 if __name__ == "__main__":

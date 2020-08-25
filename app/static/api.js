@@ -54,6 +54,15 @@ function stopAll() {
     set('fiber');
 }
 
+function authorize(username, auth) {
+    var formData = new FormData();
+    formData.append('username', username);
+    formData.append('authorize', auth)
+    const req = new Request('/users', { method: 'POST', body: formData });
+    fetch(req)
+        .catch(error => console.error(error))
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     heaterinput = document.getElementById('heater-input');
     extruderinput = document.getElementById('extruder-input');

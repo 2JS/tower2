@@ -1,3 +1,5 @@
+import os
+import pickle
 
 class User:
     def __init__(self, user_id, passwd_hash=None, authenticated=False, authorized=False, master=False):
@@ -32,17 +34,19 @@ class User:
     
 
 USERS = {
-    "root": User("root", passwd_hash='fiber2019', authorized=True),
+    "root": User("root", passwd_hash='fiber2019', authorized=True, master=True),
 }
 
 def loadUsers():
     global USERS
-    with open('/consistent/users.txt', 'rb') as f:
+    if not os.path.isfile(os.environ['TOWER_CREDENTIALS']):
+        return
+    with open(os.environ['TOWER_CREDENTIALS'], 'rb') as f:
         USERS = pickle.load(f)
 
 def saveUsers():
     global USERS
-    with open('/consistent/users.txt', 'wb') as f:
+    with open(os.environ['TOWER_CREDENTIALS'], 'wb') as f:
         pickle.dump(USERS, f)
 
 def addUser(user):
@@ -53,10 +57,8 @@ def removeUser(user):
     del USERS[user.get_id()]
     saveUsers()
 
-def authorizeUser(user):
-    USERS[user.get_id()].authorized = True
+def authorizeUser(user, authorize):
+    USERS[user.get_id()].authorized = authorize
     saveUsers()
 
-def deauthorizeUser(user):
-    USERS[user.get_id()].authorized = False
-    saveUsers()
+loadUsers()
