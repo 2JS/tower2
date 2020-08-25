@@ -9,3 +9,8 @@
 
 # virtualenv
 venv/
+
+.env
+.envrc
+
+users.txt
