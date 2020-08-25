@@ -27,6 +27,7 @@ services:
         - "traefik.http.routers.dashboard.service=api@internal"
 
     app:
+        image: lego3410/tower:latest
         build:
             context: app/
             dockerfile: ../dockerfile
