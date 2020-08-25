@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>{{title}}</title>
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+  <script type="application/javascript" src="/static/api.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <div class="page-header">
+      <h1>Tower Dashboard <span class="label label-success">beta</span>
+        <div class="btn-group btn-group-lg" style="float: right;">
+          <a type="button" class="btn btn-default btn-group-lg" href="/dashboard" role="button">Dashboard</a>
+          <a type="button" class="btn btn-default btn-group-lg" href="/logout" role="button">Log Out</a>
+        </div>
+      </h1>
+    </div>
+    <table>
+      <tbody>
+        <tr><th>Username</th><th>Authorized</th></tr>
+        {% for username, user in users.items() %}
+        <tr>
+          <td>{{ username }}</td>
+          <td>
+            {{ user.authorized }}
+            {% if not user.authorized %}
+            <div class="btn-group" style=float:right;><button type="button" class="btn btn-default" role="group" aria-label="Authorize" onclick="authorize({{username}}, true)">Authorize</button></div>
+            {% else %}
+            <div class="btn-group" style=float:right;><button type="button" class="btn btn-danger" role="group" aria-label="Authorize" onclick="authorize({{username}}, false)">Deauthorize</button></div>
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <p>
+    </p>
+  </div>
+</body>
+
+</html>

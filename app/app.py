@@ -41,7 +41,7 @@ def signup():
     password = request.form['password']
     if user_id in USERS:
         return render_template('signup.html', duplicate_username=True)
-    USERS[user_id] = User(user_id, passwd_hash=password)
+    addUser(User(user_id, passwd_hash=password))
     return redirect(url_for('login'))
 
 @app.route(pathPrefix + '/login', methods=['GET', 'POST'])
@@ -71,6 +71,16 @@ def logout():
     user.authenticated = False
     logout_user()
     return redirect(url_for('index'))
+
+@app.route(pathPrefix + '/users', methods=['GET', 'POST'])
+@login_required
+def users():
+    if request.method == 'GET':
+        user = current_user
+        if user.authorized:
+            return render_template('users.html', users=USERS)
+        else:
+            return redirect(url_for('dashboard'))
 
 @app.route(pathPrefix + '/dashboard')
 @login_required

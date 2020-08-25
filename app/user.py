@@ -29,7 +29,34 @@ class User:
 
     def is_anonymous(self):
         return False
+    
 
 USERS = {
-    "2JS": User("2JS", passwd_hash='fiber2019', authorized=True),
+    "root": User("root", passwd_hash='fiber2019', authorized=True),
 }
+
+def loadUsers():
+    global USERS
+    with open('/consistent/users.txt', 'rb') as f:
+        USERS = pickle.load(f)
+
+def saveUsers():
+    global USERS
+    with open('/consistent/users.txt', 'wb') as f:
+        pickle.dump(USERS, f)
+
+def addUser(user):
+    USERS[user.get_id()] = user
+    saveUsers()
+
+def removeUser(user):
+    del USERS[user.get_id()]
+    saveUsers()
+
+def authorizeUser(user):
+    USERS[user.get_id()].authorized = True
+    saveUsers()
+
+def deauthorizeUser(user):
+    USERS[user.get_id()].authorized = False
+    saveUsers()
