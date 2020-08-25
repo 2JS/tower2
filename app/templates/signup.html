@@ -9,14 +9,22 @@
 </head>
 
 <body>
-  <div class="container">
-    <div class="page-header">
-      <h1>Tower Sign Up <span class="label label-success">beta</span>
-        <div class="btn-group btn-group-lg" style="float: right;">
-          <a type="button" class="btn btn-default btn-group-lg" href="/login" role="button">Log In</a>
-        </div>
-      </h1>
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/dashboard">Tower Dashboard <span class="label label-success">beta</span></a>
+      </div>
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="/users">Users</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/logout">Log Out</a></li>
+        </ul>
+      </div>
     </div>
+  </nav>
+  <div class="container">
     {% if duplicate_username %}
     <div class="alert alert-danger alert-dismissible" role="alert">Given username is existing.</div>
     {% endif %}

@@ -8,43 +8,47 @@
 </head>
 
 <body>
-<div class="container">
-  <div class="page-header">
-    <h1>Tower Dashboard <span class="label label-success">beta</span>
-      <div class="btn-group btn-group-lg" style="float: right;">
-        <button type="button" class="btn btn-default btn-group-lg" role="group" aria-label="Refresh" onclick="update()">
-          <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>
-        </button>
-        <a type="button" class="btn btn-default btn-group-lg" href="/users" role="button">Users</a>
-        <a type="button" class="btn btn-default btn-group-lg" href="/logout" role="button">Log Out</a>
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/dashboard">Tower Dashboard <span class="label label-success">beta</span></a>
       </div>
-    </h1>
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="/users">Users</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/logout">Log Out</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container">
+    {% for metric in  metrics %}
+    <p>
+    <h4>{{ metric['title'] }}</h4>
+      <div class="row">
+        <div class="col-sm-8 col-lg-9">
+          <div class="input-group">
+            <input id="{{ metric['name'] }}-input" name="value" type="text" class="form-control" aria-label="{{ metric['title'] }} ({{ metric['unit'] }})" placeholder="{{ metric['unit'] }}">
+            <span class="input-group-addon">{{ metric['unit'] }}</span>
+          </div>
+        </div>
+        <div class="col-sm-4 col-lg-3">
+          <div class="btn-group btn-group-justified" role="group">
+            <div class="btn-group" role="group"><button type="button" class="btn btn-success" onclick="set('{{ metric['name'] }}')">Set</button></div>
+            <div class="btn-group" role="group"><button type="button" class="btn btn-default" onclick="inc('{{ metric['name'] }}', true)"><span class="glyphicon glyphicon-chevron-up"></button></div>
+            <div class="btn-group" role="group"><button type="button" class="btn btn-default" onclick="inc('{{ metric['name'] }}', false)"><span class="glyphicon glyphicon-chevron-down"></button></div>
+          </div>
+        </div>
+      </div>
+    </p>
+    {% endfor %}
+    <p>
+      <div class="btn-group" role="group" style="float: right;">
+        <button type="button" class="btn btn-danger" onclick="stopAll()">Stop All</button>
+      </div>
+    </p>
   </div>
-  {% for metric in  metrics %}
-  <p>
-  <h4>{{ metric['title'] }}</h4>
-    <div class="row">
-      <div class="col-sm-8 col-lg-9">
-        <div class="input-group">
-          <input id="{{ metric['name'] }}-input" name="value" type="text" class="form-control" aria-label="{{ metric['title'] }} ({{ metric['unit'] }})" placeholder="{{ metric['unit'] }}">
-          <span class="input-group-addon">{{ metric['unit'] }}</span>
-        </div>
-      </div>
-      <div class="col-sm-4 col-lg-3">
-        <div class="btn-group btn-group-justified" role="group">
-          <div class="btn-group" role="group"><button type="button" class="btn btn-success" onclick="set('{{ metric['name'] }}')">Set</button></div>
-          <div class="btn-group" role="group"><button type="button" class="btn btn-default" onclick="inc('{{ metric['name'] }}', true)"><span class="glyphicon glyphicon-chevron-up"></button></div>
-          <div class="btn-group" role="group"><button type="button" class="btn btn-default" onclick="inc('{{ metric['name'] }}', false)"><span class="glyphicon glyphicon-chevron-down"></button></div>
-        </div>
-      </div>
-    </div>
-  </p>
-  {% endfor %}
-  <p>
-    <div class="btn-group" role="group" style="float: right;">
-      <button type="button" class="btn btn-danger" onclick="stopAll()">Stop All</button>
-    </div>
-  </p>
-</div>
 </body>
 </html>
