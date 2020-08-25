@@ -79,10 +79,7 @@ def logout():
 def users():
     if request.method == 'GET':
         user = current_user
-        if user.master:
-            return render_template('users.html', users=USERS)
-        else:
-            return redirect(url_for('dashboard'))
+        return render_template('users.html', users=USERS, master=user.master)
     
     user_id = request.form['username']
     authorize = request.form['authorize']

@@ -27,7 +27,7 @@
           <td>{{ user.master}} </td>
           <td>
             {{ user.authorized }}
-            {% if not user.master %}
+            {% if not user.master and master %}
             {% if not user.authorized %}
             <div class="btn-group" style=float:right;><button type="button" class="btn btn-default" role="group" aria-label="Authorize" onclick="authorize('{{username}}', true)">Authorize</button></div>
             {% else %}
