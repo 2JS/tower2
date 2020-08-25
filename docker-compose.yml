@@ -42,9 +42,10 @@ services:
         - .env
         labels:
         - "traefik.http.routers.tower.rule=Host(`${HOST}`)"
-        - "traefik.http.routers.tower.middlewares=redirecter"
         - "traefik.http.routers.tower.tls=true"
         - "traefik.http.routers.tower.tls.certresolver=letsencrypt"
+        - "traefik.http.routers.tower-insecure.rule=Host(`${HOST}`)"
+        - "traefik.http.routers.tower-insecure.middlewares=redirecter"
         - "traefik.http.middlewares.redirecter.redirectscheme.scheme=https"
         - "traefik.http.middlewares.redirecter.redirectscheme.permanent=true"
 
