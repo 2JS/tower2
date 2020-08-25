@@ -27,10 +27,10 @@ services:
         - "traefik.http.routers.dashboard.service=api@internal"
 
     app:
-        image: lego3410/tower:latest
-        build:
-            context: app/
-            dockerfile: ../dockerfile
+        image: lego3410/tower:arm64
+        # build:
+        #     context: app/
+        #     dockerfile: ../dockerfile
         restart: unless-stopped
         volumes:
         - consistent:/consistent
@@ -42,8 +42,10 @@ services:
         - .env
         labels:
         - "traefik.http.routers.tower.rule=Host(`${HOST}`)"
+        - "traefik.http.routers.tower.middlewares=redirecter"
         - "traefik.http.routers.tower.tls=true"
         - "traefik.http.routers.tower.tls.certresolver=letsencrypt"
+        - "traefik.http.middlewares.redirecter.redirectscheme.scheme=https"
 
 
 volumes: 
