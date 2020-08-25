@@ -38,10 +38,10 @@ class Heater():
         self.heater = minimalmodbus.Instrument(port, 1)
 
     def getTemperature(self):
-        self.temperature = self.heater.read_register(1000, 2)
+        self.temperature = self.heater.read_register(101, 2)
         return self.temperature
     
     def setTemperature(self, temperature):
         self.temperature = temperature
-        self.heater.write_register(1001, int(temperature*10))
+        self.heater.write_register(101, int(temperature*10), 2)
         return
