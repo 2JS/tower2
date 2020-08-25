@@ -41,9 +41,8 @@ services:
         env_file:
         - .env
         devices:
-        - "/dev/ttyUSB0:/dev/ttyUSB0"
-        - "/dev/ttyUSB1:/dev/ttyUSB1"
         - "/dev/ttyACM0:/dev/ttyACM0"
+        - "/dev/ttyACM1:/dev/ttyACM1"
         labels:
         - "traefik.http.routers.tower.rule=Host(`${HOST}`)"
         - "traefik.http.routers.tower.tls=true"
