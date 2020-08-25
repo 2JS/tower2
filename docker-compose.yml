@@ -46,6 +46,7 @@ services:
         - "traefik.http.routers.tower.tls=true"
         - "traefik.http.routers.tower.tls.certresolver=letsencrypt"
         - "traefik.http.middlewares.redirecter.redirectscheme.scheme=https"
+        - "traefik.http.middlewares.redirecter.redirectscheme.permanent=true"
 
 
 volumes: 
