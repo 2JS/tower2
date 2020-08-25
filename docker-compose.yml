@@ -28,9 +28,9 @@ services:
 
     app:
         image: lego3410/tower:arm64
-        # build:
-        #     context: app/
-        #     dockerfile: ../dockerfile
+        build:
+            context: app/
+            dockerfile: ../Dockerfile
         restart: unless-stopped
         volumes:
         - consistent:/consistent
