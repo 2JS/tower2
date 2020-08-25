@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>{{title}}</title>
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+  <script type="application/javascript" src="/static/api.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <div class="page-header">
+      <h1>Tower Sign Up <span class="label label-success">beta</span>
+        <div class="btn-group btn-group-lg" style="float: right;">
+          <a type="button" class="btn btn-default btn-group-lg" href="/login" role="button">Log In</a>
+        </div>
+      </h1>
+    </div>
+    {% if duplicate_username %}
+    <div class="alert alert-danger alert-dismissible" role="alert">Given username is existing.</div>
+    {% endif %}
+    <form action="/signup" method="POST">
+      <p>
+      <div class="input-group">
+        <span class="input-group-addon" id="username-addon">Username</span>
+        <input type="text" name="username" class="form-control" placeholder="Alphanumeric?"
+          aria-describedby="username-addon">
+      </div>
+      </p>
+      <p>
+      <div class="input-group">
+        <span class="input-group-addon" id="password-addon">Password</span>
+        <input type="password" name="password" class="form-control" placeholder="Alphanumeric?"
+          aria-describedby="password-addon">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="submit">
+            <span class="glyphicon glyphicon-ok"></span>
+          </button>
+        </span>
+      </div>
+      </p>
+    </form>
+  </div>
+</body>
+
+</html>

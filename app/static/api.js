@@ -45,6 +45,15 @@ function inc(device, inc=true) {
     set(device);
 }
 
+function stopAll() {
+    heaterinput.value = 0;
+    set('heater');
+    extruderinput.value = 0;
+    set('extruder');
+    fiberinput.value = 0;
+    set('fiber');
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     heaterinput = document.getElementById('heater-input');
     extruderinput = document.getElementById('extruder-input');
