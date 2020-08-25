@@ -35,13 +35,14 @@ class Stepper():
 class Heater():
     temperature = 0
     def __init__(self, port):
-        self.heater = minimalmodbus.Instrument(port, 1)
+        self.heater = minimalmodbus.Instrument(port, 101)
 
     def getTemperature(self):
-        self.temperature = self.heater.read_register(101, 2)
-        return self.temperature
+        self.temperature, self.targetTemperature = self.heater.read_register(1000, 2)
+        self.on = self.heater.read_register(1015, 1)
+        return self.temperature, self.targetTemperature
     
     def setTemperature(self, temperature):
         self.temperature = temperature
-        self.heater.write_register(101, int(temperature*10), 2)
+        self.heater.write_register(1001, int(temperature*10), 1)
         return
