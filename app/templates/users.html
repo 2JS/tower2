@@ -21,7 +21,7 @@
     <table>
       <tbody>
         <tr><th width=150>Username</th><th width=100>Master</th><th width=200>Authorized</th></tr>
-        {% for username, user in users.items() %}
+        {% for username, user in data['users'].items() %}
         <tr>
           <td>{{ username }}</td>
           <td>{{ user.master}} </td>

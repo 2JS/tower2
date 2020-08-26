@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>{{title}}</title>
+  <title>{{data['title']}}</title>
   <!-- Bootstrap -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
   <script type="application/javascript" src="/static/api.js"></script>
@@ -17,8 +17,8 @@
         </div>
       </h1>
     </div>
-    {% if wrong_credential %}
-    <div class="alert alert-danger alert-dismissible" role="alert">{{ alert_text }}</div>
+    {% if data['wrong_credential'] %}
+    <div class="alert alert-danger alert-dismissible" role="alert">{{ data['alert_text'] }}</div>
     {% endif %}
     <form action="/login" method="POST">
       <p>
