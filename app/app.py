@@ -95,6 +95,10 @@ def logout():
     logout_user()
     return redirect(url_for('index'))
 
+@login_manager.unauthorized_handler
+def unauthorized():
+    return redirect(url_for('index'))
+
 @app.route(pathPrefix + '/users', methods=['GET', 'POST'])
 @login_required
 def users():
