@@ -1,8 +1,10 @@
 # Tower Dashboard
 
-Tower is a custom apparatus designed and built by Junhee Won, an undergraduate scientist and engineer in KAIST. **Tower Dashboard** is supporting service of Tower, providing control of extruder/fiber motors and heater via web service.
+Tower is a custom apparatus designed and built by Junhee Won, an undergraduate scientist and engineer at KAIST. **Tower Dashboard** is supporting service of Tower, providing control of extruder/fiber motors and heater via web service.
 
 Tower Dashboard is developed for Raspberry Pi with Docker.
+
+The updated Software -specifically everything related to the server/User interface has been written by Junseok Lee, an undergraduate software engineer and developer at KAIST. Full Acknowledgements to his contributions are due.
 
 ## Installation
 
