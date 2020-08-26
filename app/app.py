@@ -25,7 +25,12 @@ def user_loader(user_id):
 
 @app.route(pathPrefix + '/')
 def index():
-    return redirect(url_for('login'))
+    data = {
+        'title': 'Tower',
+        'description': 'Tower is a custom apparatus designed and built by Junhee Won, an undergraduate scientist and engineer in KAIST. Tower Dashboard is supporting service of Tower, providing control of extruder/fiber motors and heater via web service.',
+        'user': current_user
+    }
+    return render_template('index.html', data=data)
 
 # @app.route(pathPrefix + '/login', methods=['POST'])
 # def login():
