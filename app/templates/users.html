@@ -9,38 +9,43 @@
 </head>
 
 <body>
-  <div class="container">
-    <div class="page-header">
-      <h1>Tower Dashboard <span class="label label-success">beta</span>
-        <div class="btn-group btn-group-lg" style="float: right;">
-          <a type="button" class="btn btn-default btn-group-lg" href="/dashboard" role="button">Dashboard</a>
-          <a type="button" class="btn btn-default btn-group-lg" href="/logout" role="button">Log Out</a>
-        </div>
-      </h1>
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/dashboard">Tower Dashboard <span class="label label-success">beta</span></a>
+      </div>
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="/users">Users</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/logout">Log Out</a></li>
+        </ul>
+      </div>
     </div>
-    <table>
+  </nav>
+  <div class="container">
+    <table class="table">
       <tbody>
-        <tr><th width=150>Username</th><th width=100>Master</th><th width=200>Authorized</th></tr>
+        <tr>
+          <th width=150>Username</th>
+          <th width=100>Master</th>
+          <th width=200>Authorized</th>
+        </tr>
         {% for username, user in data['users'].items() %}
         <tr>
           <td>{{ username }}</td>
-          <td>{{ user.master}} </td>
+          <td><input type="checkbox" value="Master" aria-label="Master" {% if user.master %} checked {% endif %}
+            onclick="setmaster('{{username}}', {% if user.master %}false{% else %}true{% endif %})" disabled>
+          </td>
           <td>
-            {{ user.authorized }}
-            {% if not user.master and master %}
-            {% if not user.authorized %}
-            <div class="btn-group" style=float:right;><button type="button" class="btn btn-default" role="group" aria-label="Authorize" onclick="authorize('{{username}}', true)">Authorize</button></div>
-            {% else %}
-            <div class="btn-group" style=float:right;><button type="button" class="btn btn-danger" role="group" aria-label="Authorize" onclick="authorize('{{username}}', false)">Deauthorize</button></div>
-            {% endif %}
-            {% endif %}
+          <input type="checkbox" value="Authorized" aria-label="Authorized" {% if user.authorized %} checked {% endif %}
+          onclick="authorize('{{username}}', {% if user.authorized %}false{% else %}true{% endif %})" {% if user.master %} disabled {% endif %}>
           </td>
         </tr>
         {% endfor %}
       </tbody>
     </table>
-    <p>
-    </p>
   </div>
 </body>
 
