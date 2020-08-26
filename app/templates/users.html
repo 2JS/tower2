@@ -41,7 +41,7 @@
           </td>
           <td>
           <input type="checkbox" value="Authorized" aria-label="Authorized" {% if user.authorized %} checked {% endif %}
-          onclick="authorize('{{username}}', {% if user.authorized %}false{% else %}true{% endif %})" {% if user.master %} disabled {% endif %}>
+          onclick="authorize('{{username}}', {% if user.authorized %}false{% else %}true{% endif %})" {% if user.master or not data['currentuser'].master %} disabled {% endif %}>
           </td>
         </tr>
         {% endfor %}
