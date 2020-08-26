@@ -27,7 +27,6 @@ def user_loader(user_id):
 def index():
     data = {
         'title': 'Tower',
-        'description': 'Tower is a custom apparatus designed and built by Junhee Won, an undergraduate scientist and engineer in KAIST. Tower Dashboard is supporting service of Tower, providing control of extruder/fiber motors and heater via web service.',
         'user': current_user
     }
     return render_template('index.html', data=data)
@@ -103,6 +102,7 @@ def users():
         user = current_user
         data = {
             'users': USERS,
+            'currentuser': current_user,
             'master': user.master
         }
         return render_template('users.html', data=data)

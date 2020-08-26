@@ -1,38 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{{data['title']}}</title>
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-    <script type="application/javascript" src="/static/api.js"></script>
+  <title>{{data['title']}}</title>
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+  <script type="application/javascript" src="/static/api.js"></script>
 </head>
 <body>
-    <nav class="navbar navbar-default">
-        <div class="container">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="/">Tower <span class="label label-primary"><span class="glyphicon glyphicon-filter" aria-disabled="true"></span></a>
-            </div>
-            <div class="collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li><a href="/dashboard">Dashboard</a></li>
-                    <li><a href="/users">Users</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    {% if not data['user'].authenticated %}
-                    <li><a href="/signup">Sign Up</a></li>
-                    <li><a href="/login">Log In</a></li>
-                    {% else %}
-                    <li><a href="/logout">Log Out</a></li>
-                    {% endif %}
-                </ul>
-            </div>
-        </div>
-    </nav>
+  <nav class="navbar navbar-default">
     <div class="container">
-        <div class="jumbotron">
-            <h1>Tower, Power</h1>
-            <p>{{data['description']}}</p>
-        </div>
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/">Tower <span class="label label-primary"><span class="glyphicon glyphicon-filter" aria-disabled="true"></span></a>
+      </div>
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="/dashboard">Dashboard</a></li>
+          <li><a href="/users">Users</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          {% if not data['user'].authenticated %}
+          <li><a href="/signup">Sign Up</a></li>
+          <li><a href="/login">Log In</a></li>
+          {% else %}
+          <li><a href="/logout">Log Out</a></li>
+          {% endif %}
+        </ul>
+      </div>
     </div>
+  </nav>
+  <div class="container">
+    <div class="jumbotron">
+      <h1>Tower</h1>
+      <p>Tower is a custom apparatus designed and built by <a href="https://w1k1.2js.dev/wiki/Joonhee_%22Duke%22_Won">Junhee Won</a>, an undergraduate scientist and engineer in KAIST. Tower
+      Dashboard is supporting service of Tower, providing control of extruder/fiber motors and heater via web service.</p>
+    </div>
+  </div>
 </body>
 </html>
