@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-  <title>{{title}}</title>
+  <title>{{data['title']}}</title>
   <!-- Bootstrap -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
   <script type="application/javascript" src="/static/api.js"></script>
@@ -25,7 +24,7 @@
     </div>
   </nav>
   <div class="container">
-    {% if duplicate_username %}
+    {% if data['duplicate_username'] %}
     <div class="alert alert-danger alert-dismissible" role="alert">Given username is existing.</div>
     {% endif %}
     <form action="/signup" method="POST">

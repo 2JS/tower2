@@ -35,12 +35,14 @@ def index():
 @app.route(pathPrefix + '/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'GET':
-        return render_template('signup.html', duplicate_username=False)
+        data = {'duplicate_username': False}
+        return render_template('signup.html', data=data)
     
     user_id = request.form['username']
     password = request.form['password']
     if user_id in USERS:
-        return render_template('signup.html', duplicate_username=True)
+        data = {'duplicate_username': True}
+        return render_template('signup.html', data=data)
     addUser(User(user_id, passwd_hash=password))
     return redirect(url_for('login'))
 
@@ -48,18 +50,33 @@ def signup():
 def login():
     if request.method == 'GET':
         if current_user.is_anonymous:
-            return render_template('login.html')
+            data = {
+                'title': 'Tower',
+                'wrong_credential': False
+            }
+            return render_template('login.html', data=data)
         return redirect(url_for('dashboard'))
 
     user_id = request.form['username']
     password = request.form['password']
     if user_id not in USERS:
-        # return render_template('login.html')
-        return render_template('login.html', wrong_credential=True, alert_text="Wrong username or password.")
+        data = {
+            'wrong_credential': True,
+            'alert_text': "Wrong username or password."
+        }
+        return render_template('login.html', data=data)
     elif not USERS[user_id].can_login(password):
-        return render_template('login.html', wrong_credential=True, alert_text="Wrong username or password.")
+        data = {
+            'wrong_credential': True,
+            'alert_text': "Wrong username or password."
+        }
+        return render_template('login.html', data=data)
     elif not USERS[user_id].authorized:
-        return render_template('login.html', wrong_credential=True, alert_text="Unauthorized.")
+        data = {
+            'wrong_credential': True,
+            'alert_text': "Unauthorized."
+        }
+        return render_template('login.html', data=data)
     else:
         USERS[user_id].authenticated = True
         login_user(USERS[user_id], remember=True)
@@ -79,7 +96,11 @@ def logout():
 def users():
     if request.method == 'GET':
         user = current_user
-        return render_template('users.html', users=USERS, master=user.master)
+        data = {
+            'users': USERS,
+            'master': user.master
+        }
+        return render_template('users.html', data=data)
     
     user_id = request.form['username']
     authorize = request.form['authorize']
@@ -93,7 +114,7 @@ def users():
 @app.route(pathPrefix + '/dashboard')
 @login_required
 def dashboard():
-    metrics = [
+    inputs = [
         {
             "title": "Heater Temperature",
             "name": "heater",
@@ -111,7 +132,11 @@ def dashboard():
         }
     ]
     if current_user.authorized:
-        return render_template('dashboard.html', title=sitename+" - Dashboard", metrics=metrics)
+        data = {
+            'title': sitename,
+            'inputs': inputs
+        }
+        return render_template('dashboard.html', data=data)
     else:
         return redirect(url_for('login'))
 

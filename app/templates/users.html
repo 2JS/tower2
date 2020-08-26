@@ -32,7 +32,7 @@
           <th width=100>Master</th>
           <th width=200>Authorized</th>
         </tr>
-        {% for username, user in users.items() %}
+        {% for username, user in data['users'].items() %}
         <tr>
           <td>{{ username }}</td>
           <td><input type="checkbox" value="Master" aria-label="Master" {% if user.master %} checked {% endif %}
