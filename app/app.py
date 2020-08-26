@@ -104,6 +104,8 @@ def unauthorized():
 def users():
     if request.method == 'GET':
         user = current_user
+        if not user.master:
+            return redirect(url_for('dashboard'))
         data = {
             'users': USERS,
             'currentuser': current_user,
@@ -142,6 +144,7 @@ def dashboard():
     ]
     if current_user.authorized:
         data = {
+            'user': current_user,
             'title': sitename,
             'inputs': inputs
         }
