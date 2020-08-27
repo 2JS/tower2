@@ -4,7 +4,7 @@ Tower is a custom apparatus designed and built by Junhee Won, an undergraduate s
 
 Tower Dashboard is developed for Raspberry Pi with Docker.
 
-The updated Software -specifically everything related to the server/User interface has been written by Junseok Lee, an undergraduate software engineer and developer at KAIST. Full Acknowledgements to his contributions are due.
+The updated Software -specifically everything related to the server/User interface has been written by [2JS](https://github.com/2JS), an undergraduate software engineer and developer at KAIST. Full Acknowledgements to his contributions are due.
 
 ## Installation
 
@@ -25,13 +25,11 @@ Copy `.env.dist` to `.env`, and fill values.
 | TOWER_EXTRUDER_PORT | `/dev/ttyACM0` | Extruder USB port.                                 |
 | TOWER_FIBER_PORT    | `/dev/ttyACM1` | Fiber USB port.                                    |
 
-## Implementation
-
-Tower Dashboard is composed of two Docker containers, one is Traefik reverse proxy and the other is Flask  web server. Traefik is introduced for simple Let's Encrypt certificate management.
-
 ## Previous works
 
 This project is created as a replacement of [tower-server](https://github.com/EOMMINHO/tower-server.git) worked by [EOMMINHO](https://github.com/EOMMINHO). The need of replacement is introduced to change the server from a PC to Raspberry Pi, since using a PC solely for this very light service is wasting too much hardware resource.
+
+At first, we tried to port the original tower-server for Raspberry Pi (which is arm64 based), but some nodejs dependencies failed on Pi. So we rewriten entire server in python. (Of course, not exact translation)
 
 We brought arduino-side code and communication protocol unchanged, which may differ in future.
 
@@ -44,3 +42,9 @@ Currently, device mapping is not located automatically, and hardcoded in `.env` 
 #### Soft limit
 
 Master would be able to change the limit range of device value(speed or temperature) in future. Currently they're hardcoded.
+
+## Known Issues
+
+#### Arduino connection going unresponsive
+
+Arduino connection goes randomly unresponsive only if their speed is 0. If they're not, it seems staying responsive. Resetting arduino temporarily resolves the issue.
