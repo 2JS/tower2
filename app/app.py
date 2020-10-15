@@ -17,12 +17,6 @@ login_manager.init_app(app)
 def user_loader(user_id):
     return USERS[user_id]
 
-# if (pathPrefix):
-#     @app.route('/')
-#     def redirect_root():
-#         return redirect(url_for('root'))
-
-
 @app.route(pathPrefix + '/')
 def index():
     data = {
@@ -30,11 +24,6 @@ def index():
         'user': current_user
     }
     return render_template('index.html', data=data)
-
-# @app.route(pathPrefix + '/login', methods=['POST'])
-# def login():
-#     
-#     return jsonify(json_res)
 
 @app.route(pathPrefix + '/signup', methods=['GET', 'POST'])
 def signup():
@@ -158,4 +147,4 @@ if __name__ == "__main__":
     api.add_resource(Heater, '/api/heater')
     api.add_resource(Extruder, '/api/extruder')
     api.add_resource(Fiber, '/api/fiber')
-    app.run(host='0.0.0.0', port=int(os.environ['TOWER_WEB_PORT']))
+    app.run(host='0.0.0.0', port=int(os.environ['TOWER_WEB_PORT']), debug=True)

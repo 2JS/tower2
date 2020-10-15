@@ -1,5 +1,5 @@
 import os
-import pickle
+import json
 
 class User:
     def __init__(self, user_id, passwd_hash=None, authenticated=False, authorized=False, master=False):
@@ -14,6 +14,8 @@ class User:
             'user_id': self.user_id,
             'passwd_hash': self.passwd_hash,
             'authenticated': self.authenticated,
+            'authorized': self.authorized,
+            'master': self.master,
         }
         return str(r)
 
@@ -41,13 +43,13 @@ def loadUsers():
     global USERS
     if not os.path.isfile(os.environ['TOWER_CREDENTIALS']):
         return
-    with open(os.environ['TOWER_CREDENTIALS'], 'rb') as f:
-        USERS = pickle.load(f)
+    with open(os.environ['TOWER_CREDENTIALS'], 'r') as f:
+        USERS = json.load(f)
 
 def saveUsers():
     global USERS
-    with open(os.environ['TOWER_CREDENTIALS'], 'wb') as f:
-        pickle.dump(USERS, f)
+    with open(os.environ['TOWER_CREDENTIALS'], 'w') as f:
+        json.dump(USERS, f, indent=2)
 
 def addUser(user):
     USERS[user.get_id()] = user
